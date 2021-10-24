@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
+  font-family: "Poppins", sans-serif;
 }
+
 #new-book {
   margin: 20px auto; /* just to see it clearly*/
   width: 175px;
@@ -18,7 +22,13 @@
 #new-book:hover {
   transform: scale(1.1);
 }
+
 #new-book > i {
   font-size: 5em;
   color: rgb(126, 126, 126);
+}
+
+.modal-header {
+  background-color: rgb(65, 65, 65);
+  color: white;
 }

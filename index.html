@@ -15,7 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css"
     />
     <link rel="stylesheet" href="styles.css" />
-    <title>BKWORM</title>
+    <title>Library</title>
   </head>
   <body>
     <main>
@@ -36,13 +36,88 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Add a new book</h4>
+              <h4 class="modal-title">New Book</h4>
               <button
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="book-name"
+                    placeholder="Harry Potter"
+                  />
+                  <label for="floatingInputValue">Book Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="author-name"
+                    placeholder="J.K. Rowling"
+                  />
+                  <label for="floatingInputValue">Author</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="no-of-pages"
+                    placeholder="100"
+                  />
+                  <label for="floatingInputValue">Number of Pages</label>
+                </div>
+                <div id="radio-buttons" class="mt-4 mb-4">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="status1"
+                      value="Completed"
+                    />
+                    <label class="form-check-label" for="status1"
+                      >Completed</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="status2"
+                      value="Reading"
+                    />
+                    <label class="form-check-label" for="status2"
+                      >Reading</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="status3"
+                      value="Yet to Read"
+                    />
+                    <label class="form-check-label" for="status3"
+                      >Yet to Read</label
+                    >
+                  </div>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-success float-end">
+                    ADD BOOK
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
