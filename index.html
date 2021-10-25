@@ -52,6 +52,7 @@
                     class="form-control"
                     id="book-name"
                     placeholder="Harry Potter"
+                    required
                   />
                   <label for="floatingInputValue">Book Name</label>
                 </div>
@@ -61,6 +62,7 @@
                     class="form-control"
                     id="author-name"
                     placeholder="J.K. Rowling"
+                    required
                   />
                   <label for="floatingInputValue">Author</label>
                 </div>
@@ -71,6 +73,7 @@
                     class="form-control"
                     id="no-of-pages"
                     placeholder="100"
+                    required
                   />
                   <label for="floatingInputValue">Number of Pages</label>
                 </div>
@@ -82,6 +85,7 @@
                       name="inlineRadioOptions"
                       id="status1"
                       value="Completed"
+                      required
                     />
                     <label class="form-check-label" for="status1"
                       >Completed</label
@@ -113,7 +117,11 @@
                   </div>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-success float-end">
+                  <button
+                    id="submit-button"
+                    type="submit"
+                    class="btn btn-success float-end"
+                  >
                     ADD BOOK
                   </button>
                 </div>
@@ -122,6 +130,7 @@
           </div>
         </div>
       </div>
+      <div id="pre"></div>
     </main>
 
     <script
