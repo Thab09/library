@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 
 * {
   margin: 0;
@@ -6,9 +6,15 @@
   font-family: "Poppins", sans-serif;
 }
 
+#books-library {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
 #new-book {
-  margin: 20px auto; /* just to see it clearly*/
-  width: 175px;
+  /* margin: 20px auto; just to see it clearly */
+  width: 190px;
   height: 230px;
   border: solid 1px rgb(211, 211, 211);
   border-radius: 3px;
@@ -26,6 +32,78 @@
 #new-book > i {
   font-size: 5em;
   color: rgb(126, 126, 126);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 190px;
+  height: 230px;
+  border: solid 1px rgb(189, 189, 189);
+  border-radius: 3px;
+  padding: 5px 14px;
+  overflow: auto;
+}
+/* SCROLLBAR START */
+.card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  border-radius: 100px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  border-radius: 100px;
+  background-color: #00576d;
+  background-clip: content-box;
+}
+/* SCROLLBAR END */
+
+.card-content {
+  display: flex;
+  width: auto;
+  height: 215px;
+  flex-direction: column;
+}
+
+.card-content > p {
+  margin-bottom: 0px;
+}
+
+.card-content > p:first-child {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 26px 0 10px;
+  line-height: 120%;
+}
+.card-content > p:nth-child(2) {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(70, 70, 70);
+  margin: 30px 0 5px;
+}
+.card-button {
+  position: absolute;
+  align-self: flex-end;
+}
+
+.card-button > button {
+  visibility: hidden;
+  opacity: 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: visibility 0.4s, opacity 0.4s linear;
+}
+
+.card:hover > .card-button > button {
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal-header {
