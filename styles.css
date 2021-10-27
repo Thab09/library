@@ -17,7 +17,7 @@
   width: 190px;
   height: 230px;
   border: solid 1px rgb(211, 211, 211);
-  border-radius: 3px;
+  border-radius: px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,25 +36,31 @@
 
 .card {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   width: 190px;
   height: 230px;
   border: solid 1px rgb(189, 189, 189);
-  border-radius: 3px;
-  padding: 5px 14px;
+  border-radius: 1px;
+  padding: 5px;
   overflow: auto;
+  transition: all 0.4s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.2);
 }
 /* SCROLLBAR START */
-.card::-webkit-scrollbar {
+.card-content::-webkit-scrollbar {
+  position: absolute;
   width: 8px;
 }
 
-.card::-webkit-scrollbar-track {
+.card-content::-webkit-scrollbar-track {
   background-color: #ffffff;
   border-radius: 100px;
 }
 
-.card::-webkit-scrollbar-thumb {
+.card-content::-webkit-scrollbar-thumb {
   border: 1px solid transparent;
   border-radius: 100px;
   background-color: #00576d;
@@ -67,6 +73,8 @@
   width: auto;
   height: 215px;
   flex-direction: column;
+  text-align: center;
+  overflow: auto;
 }
 
 .card-content > p {
@@ -83,22 +91,44 @@
   font-size: 18px;
   font-weight: 600;
   color: rgb(70, 70, 70);
-  margin: 30px 0 5px;
 }
+
+.card-content > p:nth-child(3) {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
 .card-button {
   position: absolute;
-  align-self: flex-end;
+  align-self: center;
 }
 
 .card-button > button {
   visibility: hidden;
   opacity: 0;
-  width: 30px;
-  height: 30px;
+  width: 94px;
+  height: 40px;
   border: none;
-  border-radius: 50%;
-  background-color: transparent;
+  background-color: white;
   transition: visibility 0.4s, opacity 0.4s linear;
+}
+
+.card-button > button:first-child > i {
+  color: rgb(255, 145, 0);
+}
+
+.card-button > button:first-child:hover {
+  border-top: thick double rgb(255, 145, 0);
+}
+
+.card-button > button:nth-child(2) > i {
+  color: rgb(255, 0, 0);
+}
+
+.card-button > button:nth-child(2):hover {
+  border-top: thick double rgb(255, 0, 0);
 }
 
 .card:hover > .card-button > button {
@@ -107,6 +137,6 @@
 }
 
 .modal-header {
-  background-color: rgb(65, 65, 65);
+  background-color: rgb(0, 61, 13);
   color: white;
 }
