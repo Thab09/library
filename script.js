@@ -2,10 +2,9 @@ const myModal = new bootstrap.Modal(document.getElementById("book-modal"), {
   keyboard: true,
 });
 const displayBooks = document.getElementById("display-books");
+const submitButton = document.getElementById("submit-button");
 
-document
-  .getElementById("submit-button")
-  .addEventListener("click", addBookToLibrary);
+submitButton.onclick = (e) => addBookToLibrary(e);
 
 function Book(id, title, author, pages, status) {
   this.id = id;
@@ -22,6 +21,13 @@ let myLibrary = [
     author: "J.K. Rowling",
     pages: 23,
     status: "Reading",
+  },
+  {
+    id: 1635355542810,
+    title: "Dune",
+    author: "Frank Hebert",
+    pages: 485,
+    status: "Yet to Read",
   },
 ];
 
@@ -41,6 +47,7 @@ function LibrarytoLocaleStorage() {
 
 function addBookToLibrary(e) {
   e.preventDefault();
+  if (submitButton.textContent === "Update") return;
   myModal.hide();
 
   let id = Date.now();
@@ -94,7 +101,8 @@ function bookCardsForLibrary(id, title, author, pages, status) {
   editButton.innerHTML = `<i class="bi bi-pen"></i>`;
   deleteButton.innerHTML = `<i class="bi bi-x-lg"></i>`;
 
-  editButton.onclick = (e) => console.log(id);
+  editButton.onclick = (e) =>
+    editBook(myLibrary.find((book) => book.id === id));
   deleteButton.onclick = (e) => deleteBook(id);
 
   buttonContainer.appendChild(editButton);
@@ -107,6 +115,48 @@ function bookCardsForLibrary(id, title, author, pages, status) {
   cardContainer.appendChild(contentContainer);
 
   displayBooks.appendChild(cardContainer);
+}
+
+function editBook(book) {
+  myModal.show();
+
+  document.getElementById("book-name").value = book.title;
+  document.getElementById("author-name").value = book.author;
+  document.getElementById("no-of-pages").value = book.pages;
+  const radios = Array.from(
+    document.querySelectorAll('input[name="inlineRadioOptions"]')
+  );
+  radios.forEach((radioStatus) => {
+    if (radioStatus.defaultValue === book.status) {
+      radioStatus.checked = true;
+    }
+  });
+  submitButton.textContent = "Update";
+  const modalElement = document.getElementById("book-modal");
+  modalElement.addEventListener("hidden.bs.modal", function (e) {
+    submitButton.textContent = "Add Book";
+    document.querySelector("form").reset();
+  });
+  submitButton.onclick = (e) => updateBook(e, book);
+}
+
+function updateBook(e, book) {
+  e.preventDefault();
+  console.log(book);
+
+  book.title = document.getElementById("book-name").value;
+  book.author = document.getElementById("author-name").value;
+  book.pages = document.getElementById("no-of-pages").value;
+  book.status = document.querySelector(
+    'input[name="inlineRadioOptions"]:checked'
+  ).value;
+
+  LibrarytoLocaleStorage();
+
+  document.querySelector("form").reset();
+  myModal.hide();
+
+  submitButton.textContent = "Add Book";
 }
 
 function deleteBook(id) {
