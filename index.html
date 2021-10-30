@@ -41,6 +41,7 @@
               <h4 class="modal-title">New Book</h4>
               <button
                 type="button"
+                id="close-modal"
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
@@ -123,8 +124,17 @@
                     id="submit-button"
                     type="submit"
                     class="btn btn-success float-end"
+                    style="display: none"
                   >
                     ADD BOOK
+                  </button>
+                  <button
+                    id="update-button"
+                    type="submit"
+                    class="btn btn-success float-end mx-3"
+                    style="display: none"
+                  >
+                    UPDATE
                   </button>
                 </div>
               </form>

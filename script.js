@@ -1,9 +1,13 @@
 const myModal = new bootstrap.Modal(document.getElementById("book-modal"), {
   keyboard: true,
 });
+const addBookCard = document.getElementById("book-modal");
 const displayBooks = document.getElementById("display-books");
 const submitButton = document.getElementById("submit-button");
+const updateButton = document.getElementById("update-button");
+const newBook = document.getElementById("new-book");
 
+newBook.onclick = () => buttonVisibility(submitButton);
 submitButton.onclick = (e) => addBookToLibrary(e);
 
 function Book(id, title, author, pages, status) {
@@ -34,6 +38,23 @@ let myLibrary = [
 localeStorageToLibrary();
 displayLibrary();
 
+function checkForm(e) {
+  if (
+    document.getElementById("book-name").value === "" ||
+    document.getElementById("author-name").value === "" ||
+    document.getElementById("no-of-pages").value === "" ||
+    document.querySelector('input[name="inlineRadioOptions"]:checked').value ===
+      null
+  ) {
+    alert("Please fill the form!");
+    return true;
+  }
+}
+
+function buttonVisibility(button) {
+  button.style.display = "inline";
+}
+
 function localeStorageToLibrary() {
   localStorage.getItem("Library") === null
     ? false
@@ -46,8 +67,9 @@ function LibrarytoLocaleStorage() {
 }
 
 function addBookToLibrary(e) {
+  if (checkForm()) return;
   e.preventDefault();
-  if (submitButton.textContent === "Update") return;
+
   myModal.hide();
 
   let id = Date.now();
@@ -57,13 +79,10 @@ function addBookToLibrary(e) {
   let status = document.querySelector(
     'input[name="inlineRadioOptions"]:checked'
   ).value;
-
   let book = new Book(id, title, author, pages, status);
 
   myLibrary.push(book);
-
   document.querySelector("form").reset();
-
   LibrarytoLocaleStorage();
 }
 
@@ -80,6 +99,10 @@ function displayLibrary() {
   }
 }
 
+addBookCard.addEventListener("hidden.bs.modal", function (e) {
+  submitButton.style.display = "none";
+});
+
 function bookCardsForLibrary(id, title, author, pages, status) {
   const cardContainer = document.createElement("div");
   const buttonContainer = document.createElement("div");
@@ -87,7 +110,6 @@ function bookCardsForLibrary(id, title, author, pages, status) {
   const bookTitle = document.createElement("p");
   const authorTitle = document.createElement("p");
   const pageCount = document.createElement("p");
-  // const bookStatus = document.createElement("p");
   const editButton = document.createElement("button");
   const deleteButton = document.createElement("button");
 
@@ -97,12 +119,27 @@ function bookCardsForLibrary(id, title, author, pages, status) {
   bookTitle.textContent = title;
   authorTitle.textContent = author;
   pageCount.textContent = pages + " pages";
-  // bookStatus.textContent = status;
   editButton.innerHTML = `<i class="bi bi-pen"></i>`;
   deleteButton.innerHTML = `<i class="bi bi-x-lg"></i>`;
 
-  editButton.onclick = (e) =>
+  switch (status) {
+    case "Completed":
+      cardContainer.style.borderBottom = "2mm ridge rgba(0, 255, 0, 0.8)";
+      break;
+    case "Reading":
+      cardContainer.style.borderBottom = "2mm ridge rgba(255, 242, 0, 0.8)";
+      break;
+    case "Yet to Read":
+      cardContainer.style.borderBottom = "2mm ridge rgba(255, 0, 0, .8)";
+      break;
+    default:
+      console.log("something wrong with status");
+  }
+
+  editButton.onclick = (e) => {
     editBook(myLibrary.find((book) => book.id === id));
+    buttonVisibility(updateButton);
+  };
   deleteButton.onclick = (e) => deleteBook(id);
 
   buttonContainer.appendChild(editButton);
@@ -111,13 +148,13 @@ function bookCardsForLibrary(id, title, author, pages, status) {
   contentContainer.appendChild(bookTitle);
   contentContainer.appendChild(authorTitle);
   contentContainer.appendChild(pageCount);
-  // contentContainer.appendChild(bookStatus);
   cardContainer.appendChild(contentContainer);
 
   displayBooks.appendChild(cardContainer);
 }
 
 function editBook(book) {
+  submitButton.style.display = "none";
   myModal.show();
 
   document.getElementById("book-name").value = book.title;
@@ -131,18 +168,16 @@ function editBook(book) {
       radioStatus.checked = true;
     }
   });
-  submitButton.textContent = "Update";
-  const modalElement = document.getElementById("book-modal");
-  modalElement.addEventListener("hidden.bs.modal", function (e) {
-    submitButton.textContent = "Add Book";
+  addBookCard.addEventListener("hidden.bs.modal", function (e) {
     document.querySelector("form").reset();
+    updateButton.style.display = "none";
   });
-  submitButton.onclick = (e) => updateBook(e, book);
+  updateButton.onclick = (e) => updateBook(e, book);
 }
 
 function updateBook(e, book) {
+  if (checkForm()) return;
   e.preventDefault();
-  console.log(book);
 
   book.title = document.getElementById("book-name").value;
   book.author = document.getElementById("author-name").value;
@@ -153,10 +188,9 @@ function updateBook(e, book) {
 
   LibrarytoLocaleStorage();
 
+  updateButton.style.display = "none";
   document.querySelector("form").reset();
   myModal.hide();
-
-  submitButton.textContent = "Add Book";
 }
 
 function deleteBook(id) {
@@ -165,7 +199,6 @@ function deleteBook(id) {
   LibrarytoLocaleStorage();
 }
 
-// ADD EDIT
-// SHOW THE STATUS
 // NAV BAR - ALL / REA / YET / FINISHED
 // CSS
+//CLEAN CODE
