@@ -88,6 +88,9 @@ function addBookToLibrary(e) {
 
 function displayLibrary() {
   displayBooks.innerHTML = "";
+
+  displayBooks.appendChild(newBook);
+
   for (const book of myLibrary) {
     bookCardsForLibrary(
       book.id,
@@ -141,7 +144,6 @@ function bookCardsForLibrary(id, title, author, pages, status) {
     buttonVisibility(updateButton);
   };
   deleteButton.onclick = (e) => deleteBook(id);
-
   buttonContainer.appendChild(editButton);
   buttonContainer.appendChild(deleteButton);
   cardContainer.appendChild(buttonContainer);
@@ -199,6 +201,6 @@ function deleteBook(id) {
   LibrarytoLocaleStorage();
 }
 
-// NAV BAR - ALL / REA / YET / FINISHED
-// CSS
-//CLEAN CODE
+// FUNCTIONALITY TO NAV
+// DARK MODE
+// CLEAN CODE

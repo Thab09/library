@@ -18,16 +18,28 @@
     <title>Library</title>
   </head>
   <body>
-    <main>
-      <nav></nav>
-      <div id="books-library">
-        <div id="new-book" data-bs-toggle="modal" data-bs-target="#book-modal">
-          <i class="bi bi-plus-lg"></i>
-        </div>
+    <nav>
+      <h1>BKMRK</h1>
+      <ul id="library-options">
+        <li id="library">Library</li>
+        <li id="completed">Completed</li>
+        <li id="reading">Reading</li>
+        <li id="yet-to-read">Yet to Read</li>
+      </ul>
+    </nav>
 
+    <main>
+      <!-- DISPLAYS THE BOOKS -->
+      <div id="books-library">
         <div id="display-books"></div>
       </div>
 
+      <!-- NEW BOOK BUTTON (WILL BE APPENDED INTO DISPLAY-BOOKS THROUGH JS) -->
+      <div id="new-book" data-bs-toggle="modal" data-bs-target="#book-modal">
+        <i class="bi bi-plus-lg"></i>
+      </div>
+
+      <!-- BOOTSTRAP MODAL START -->
       <div
         class="modal"
         id="book-modal"
@@ -142,7 +154,7 @@
           </div>
         </div>
       </div>
-      <div id="pre"></div>
+      <!-- BOOTSTRAP MODAL END -->
     </main>
 
     <script
