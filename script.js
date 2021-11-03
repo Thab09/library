@@ -1,15 +1,46 @@
 const myModal = new bootstrap.Modal(document.getElementById("book-modal"), {
   keyboard: true,
 });
+const libraryOptions = document.querySelectorAll("li");
+const nav = document.getElementById("library-options");
 const addBookCard = document.getElementById("book-modal");
 const displayBooks = document.getElementById("display-books");
 const submitButton = document.getElementById("submit-button");
 const updateButton = document.getElementById("update-button");
 const newBook = document.getElementById("new-book");
+const burger = document.querySelector(".burger");
+let currentFilter = "";
 
+libraryOptions.forEach(
+  (option) =>
+    (option.onclick = (e) => {
+      filter(e.target.textContent);
+      for (let li of libraryOptions) {
+        li.classList.remove("active");
+      }
+      option.classList.add("active");
+
+      nav.classList.toggle("nav-open");
+      burger.classList.toggle("toggle");
+    })
+);
 newBook.onclick = () => buttonVisibility(submitButton);
 submitButton.onclick = (e) => addBookToLibrary(e);
+burger.onclick = () => {
+  nav.classList.toggle("nav-open");
+  burger.classList.toggle("toggle");
+};
 
+function filter(filterType) {
+  if (filterType === "Library") {
+    currentFilter = filterType;
+    displayLibrary(myLibrary);
+  } else {
+    currentFilter = filterType;
+    const result = myLibrary.filter((book) => book.status === filterType);
+    displayLibrary(result);
+  }
+}
 function Book(id, title, author, pages, status) {
   this.id = id;
   this.title = title;
@@ -36,7 +67,7 @@ let myLibrary = [
 ];
 
 localeStorageToLibrary();
-displayLibrary();
+displayLibrary(myLibrary);
 
 function checkForm(e) {
   if (
@@ -63,7 +94,7 @@ function localeStorageToLibrary() {
 
 function LibrarytoLocaleStorage() {
   localStorage.setItem("Library", JSON.stringify(myLibrary));
-  displayLibrary();
+  filter(currentFilter);
 }
 
 function addBookToLibrary(e) {
@@ -86,12 +117,11 @@ function addBookToLibrary(e) {
   LibrarytoLocaleStorage();
 }
 
-function displayLibrary() {
+function displayLibrary(arrayToDisplay) {
   displayBooks.innerHTML = "";
 
   displayBooks.appendChild(newBook);
-
-  for (const book of myLibrary) {
+  for (const book of arrayToDisplay) {
     bookCardsForLibrary(
       book.id,
       book.title,
@@ -201,6 +231,5 @@ function deleteBook(id) {
   LibrarytoLocaleStorage();
 }
 
-// FUNCTIONALITY TO NAV
 // DARK MODE
 // CLEAN CODE
