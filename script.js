@@ -54,7 +54,7 @@ let myLibrary = [
     id: 1635355542910,
     title: "Harry Potter",
     author: "J.K. Rowling",
-    pages: 23,
+    pages: 203,
     status: "Reading",
   },
   {
@@ -63,6 +63,13 @@ let myLibrary = [
     author: "Frank Hebert",
     pages: 485,
     status: "Yet to Read",
+  },
+  {
+    id: 1635355542710,
+    title: "Don Quixote",
+    author: "Miguel de Cervantes",
+    pages: 165,
+    status: "Completed",
   },
 ];
 
