@@ -9,7 +9,7 @@ const submitButton = document.getElementById("submit-button");
 const updateButton = document.getElementById("update-button");
 const newBook = document.getElementById("new-book");
 const burger = document.querySelector(".burger");
-let currentFilter = "";
+let currentFilter = "Library";
 
 libraryOptions.forEach(
   (option) =>
