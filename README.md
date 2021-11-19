@@ -10,7 +10,7 @@ A web app where you can manage your very own bookshelf online.
 
 ## Features
 - Clean and user friendly design
-- Add books with details (title, author, No. of pages, the status of the book)
-- Edit the details of the books after you added them
+- Add books with details (title, author, no. of pages, the status of the book)
+- Edit the details of the books after adding them to the library
 - Delete books from your bookshelf
-- Stores all the books locally on your LocalStorage
+- Stores all the books locally on LocalStorage
